@@ -15,12 +15,15 @@
 # ── Stage 1: build ────────────────────────────────────────────────────────────
 FROM node:22-bookworm-slim AS build
 
-RUN corepack enable
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 make g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY package.json yarn.lock .yarnrc.yml backstage.json ./
-COPY .yarn ./.yarn
+COPY package.json yarn.lock backstage.json ./
+COPY --from=yarn-config .yarnrc.yml ./.yarnrc.yml
+COPY --from=yarn-releases . ./.yarn/releases/
 
 COPY tsconfig.json .eslintrc.js .eslintignore ./
 
@@ -28,7 +31,6 @@ COPY packages/ ./packages/
 COPY plugins/ ./plugins/
 COPY app-config.yaml ./
 
-# FIX 1: Allow scripts during initial build so tooling builds correctly
 RUN YARN_ENABLE_IMMUTABLE_INSTALLS=false \
     YARN_CACHE_FOLDER=/root/.yarn/berry/cache \
     yarn install
@@ -40,9 +42,7 @@ RUN yarn workspace backend build
 # ── Stage 2: production image ─────────────────────────────────────────────────
 FROM node:22-bookworm-slim
 
-# Install compilation tools (g++ package natively provides the system g++)
-RUN corepack enable \
-    && apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 make g++ \
     && rm -rf /var/lib/apt/lists/*
 
@@ -54,16 +54,12 @@ RUN tar xzf skeleton.tar.gz && rm skeleton.tar.gz
 COPY --from=build /app/package.json /app/yarn.lock /app/.yarnrc.yml ./
 COPY --from=build /app/.yarn ./.yarn
 
-# FIX 2: REMOVED the inline Node script that was muting postinstall scripts.
-# FIX 3: Run production install allowing native C++ compilation to happen naturally.
 RUN YARN_ENABLE_IMMUTABLE_INSTALLS=false \
     YARN_CACHE_FOLDER=/root/.yarn/berry/cache \
     yarn workspaces focus --all --production
 
-# FIX 4: Explicitly force a targeted native compilation for your runtime environment
 RUN yarn workspace backend exec node-gyp rebuild || true
 
-# Clean up yarn cache after native build is done
 RUN rm -rf "$(yarn cache dir)"
 
 COPY --from=build /app/packages/app/package.json packages/app/package.json

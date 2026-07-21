@@ -24,8 +24,7 @@
     "lint": "backstage-cli repo lint --since origin/main",
     "lint:all": "backstage-cli repo lint",
     "prettier:check": "prettier --check .",
-    "new": "backstage-cli new --scope @red-hat-developer-hub",
-    "postinstall": "cd ../../ && yarn install"
+    "new": "backstage-cli new --scope @red-hat-developer-hub"
   },
   "workspaces": {
     "packages": [
@@ -65,5 +64,40 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "dependenciesMeta": {
+    "@swc/core": {
+      "built": true
+    },
+    "@tree-sitter-grammars/tree-sitter-yaml": {
+      "built": true
+    },
+    "better-sqlite3": {
+      "built": true
+    },
+    "cpu-features": {
+      "built": true
+    },
+    "esbuild": {
+      "built": true
+    },
+    "isolated-vm": {
+      "built": true
+    },
+    "keytar": {
+      "built": true
+    },
+    "protobufjs": {
+      "built": true
+    },
+    "ssh2": {
+      "built": true
+    },
+    "tree-sitter": {
+      "built": true
+    },
+    "tree-sitter-json": {
+      "built": true
+    }
   }
 }

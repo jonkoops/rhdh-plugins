@@ -24,8 +24,7 @@
     "prettier:fix": "prettier --write .",
     "chores": "yarn prettier:fix && yarn lint:all --fix && yarn tsc:full && yarn build:api-reports && yarn openspec:validate && yarn test:all",
     "new": "backstage-cli new --scope @red-hat-developer-hub",
-    "openspec:validate": "openspec validate --all --json",
-    "postinstall": "cd ../../ && yarn install"
+    "openspec:validate": "openspec validate --all --json"
   },
   "workspaces": {
     "packages": [
@@ -67,5 +66,28 @@
   "maintainers": [
     "@durandom",
     "@gabemontero"
-  ]
+  ],
+  "dependenciesMeta": {
+    "@swc/core": {
+      "built": true
+    },
+    "better-sqlite3": {
+      "built": true
+    },
+    "cpu-features": {
+      "built": true
+    },
+    "esbuild": {
+      "built": true
+    },
+    "keytar": {
+      "built": true
+    },
+    "protobufjs": {
+      "built": true
+    },
+    "ssh2": {
+      "built": true
+    }
+  }
 }

@@ -218,6 +218,8 @@ function backstage-image {
   echo "Building Backstage app image: $image_tag"
   "$_pocker" build \
     "${volume_args[@]+"${volume_args[@]}"}" \
+    --build-context "yarn-releases=$workspace_dir/../../.yarn/releases" \
+    --build-context "yarn-config=$workspace_dir/../.." \
     --tag "$image_tag" \
     --tag "$REGISTRY_URL/$ORG_ID/$REPO:main" \
     "$workspace_dir"

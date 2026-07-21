@@ -27,7 +27,6 @@
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "new": "backstage-cli new --scope @red-hat-developer-hub",
-    "postinstall": "cd ../../ && yarn install",
     "e2e-test": "playwright test",
     "e2e-test:live": "playwright test --project=live"
   },
@@ -42,7 +41,6 @@
     "url": "https://github.com/redhat-developer/rhdh-plugins",
     "directory": "workspaces/dcm"
   },
-  "packageManager": "yarn@4.15.0",
   "devDependencies": {
     "@backstage/cli": "^0.35.2",
     "@backstage/e2e-test-utils": "^0.1.1",
@@ -79,5 +77,37 @@
   },
   "dependencies": {
     "yup": "^1.7.1"
+  },
+  "dependenciesMeta": {
+    "@swc/core": {
+      "built": true
+    },
+    "@tree-sitter-grammars/tree-sitter-yaml": {
+      "built": true
+    },
+    "better-sqlite3": {
+      "built": true
+    },
+    "cpu-features": {
+      "built": true
+    },
+    "esbuild": {
+      "built": true
+    },
+    "isolated-vm": {
+      "built": true
+    },
+    "protobufjs": {
+      "built": true
+    },
+    "ssh2": {
+      "built": true
+    },
+    "tree-sitter": {
+      "built": true
+    },
+    "tree-sitter-json": {
+      "built": true
+    }
   }
 }

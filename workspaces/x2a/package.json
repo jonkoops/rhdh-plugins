@@ -29,8 +29,7 @@
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "chores": "yarn prettier:fix && yarn lint:all --fix && yarn tsc:full && yarn build:api-reports && yarn test:all:pg",
-    "new": "backstage-cli new --scope @red-hat-developer-hub",
-    "postinstall": "cd ../../ && yarn install"
+    "new": "backstage-cli new --scope @red-hat-developer-hub"
   },
   "workspaces": {
     "packages": [
@@ -78,5 +77,37 @@
     "@mareklibra",
     "@eloycoto",
     "@yray-pixel"
-  ]
+  ],
+  "dependenciesMeta": {
+    "@swc/core": {
+      "built": true
+    },
+    "@tree-sitter-grammars/tree-sitter-yaml": {
+      "built": true
+    },
+    "better-sqlite3": {
+      "built": true
+    },
+    "cpu-features": {
+      "built": true
+    },
+    "esbuild": {
+      "built": true
+    },
+    "isolated-vm": {
+      "built": true
+    },
+    "protobufjs": {
+      "built": true
+    },
+    "ssh2": {
+      "built": true
+    },
+    "tree-sitter": {
+      "built": true
+    },
+    "tree-sitter-json": {
+      "built": true
+    }
+  }
 }

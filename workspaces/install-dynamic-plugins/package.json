@@ -25,8 +25,7 @@
     "lint:all": "backstage-cli repo lint",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "new": "backstage-cli new --scope @red-hat-developer-hub",
-    "postinstall": "cd ../../ && yarn install"
+    "new": "backstage-cli new --scope @red-hat-developer-hub"
   },
   "prettier": "@spotify/prettier-config",
   "lint-staged": {
@@ -50,5 +49,18 @@
     "prettier": "^3.4.2",
     "typescript": "~5.8.0"
   },
-  "packageManager": "yarn@4.12.0"
+  "dependenciesMeta": {
+    "@swc/core": {
+      "built": true
+    },
+    "esbuild": {
+      "built": true
+    },
+    "keytar": {
+      "built": true
+    },
+    "unrs-resolver": {
+      "built": true
+    }
+  }
 }
